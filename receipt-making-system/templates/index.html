@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Receipt Generator</h1>
+        <form method="POST" action="{{ url_for('generate_receipt') }}">
+            <label>Customer Name:</label>
+            <input type="text" name="customer_name" required><br><br>
+
+            <div id="item-container">
+                <div class="item-row">
+                    <input type="text" name="item[]" placeholder="Item name" required>
+                    <input type="number" name="price[]" placeholder="Price" step="0.01" required>
+                    <input type="number" name="quantity[]" placeholder="Quantity" min="1" required>
+                </div>
+            </div>
+            <button type="button" onclick="addItem()">Add Item</button><br><br>
+            <input type="submit" value="Generate Receipt">
+        </form>
+
+        <script>
+            function addItem() {
+                const container = document.getElementById('item-container');
+                const div = document.createElement('div');
+                div.className = 'item-row';
+                div.innerHTML = `
+                    <input type="text" name="item[]" placeholder="Item name" required>
+                    <input type="number" name="price[]" placeholder="Price" step="0.01" required>
+                    <input type="number" name="quantity[]" placeholder="Quantity" min="1" required>
+                `;
+                container.appendChild(div);
+            }
+        </script>
+    </div>
+</body>
+</html>

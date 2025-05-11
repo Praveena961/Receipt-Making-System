@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Receipt</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Receipt</h1>
+        <p><strong>Customer Name:</strong> {{ customer_name }}</p>
+        <table>
+            <tr>
+                <th>Item</th>
+                <th>Price (₹)</th>
+                <th>Quantity</th>
+                <th>Total (₹)</th>
+            </tr>
+            {% for item, price, quantity, item_total in receipt_items %}
+            <tr>
+                <td>{{ item }}</td>
+                <td>{{ price }}</td>
+                <td>{{ quantity }}</td>
+                <td>{{ item_total }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h2>Total Amount: ₹{{ total }}</h2>
+    </div>
+</body>
+</html>
